@@ -1,7 +1,7 @@
 trigger: [ "*" ]
 
 pool:
-  name: Ubuntu 16.04
+  name: Hosted Ubuntu 1604
 
 variables:
   buildConfiguration: 'Release'
