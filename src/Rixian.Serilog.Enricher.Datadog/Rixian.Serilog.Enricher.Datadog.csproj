@@ -1,7 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Rixian</Authors>
+    <Description>Adds enrichers that add the Datadog SpanID and TraceID fields to the output logs.</Description>
+    <Copyright>© Rixian LLC. All rights reserved.</Copyright>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageIconUrl>https://storagerixiannet.blob.core.windows.net/public/nuget/icons/nuget-rixian-256.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
