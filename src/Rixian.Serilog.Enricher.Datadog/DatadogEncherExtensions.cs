@@ -1,11 +1,9 @@
 ﻿using Rixian.Serilog.Enricher.Datadog;
-using Serilog;
 using Serilog.Configuration;
-using System;
 
-namespace Serilog.Configuration
+namespace Serilog
 {
-    public static class DatadogEncherExtensions
+    public static class DatadogEnricherExtensions
     {
         public static LoggerConfiguration WithDatadog(this LoggerEnrichmentConfiguration enrich)
         {
