@@ -45,3 +45,24 @@ stages:
       displayName: 'Publish Artifact'
       inputs:
         PathtoPublish: '$(build.artifactstagingdirectory)'
+
+
+- stage: Release
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+  jobs:
+  - job: Release
+    pool:
+      name: Hosted Ubuntu 1604
+    steps:
+    - task: NuGetToolInstaller@1
+      displayName: 'Use NuGet 5.0.2'
+      inputs:
+        versionSpec: 5.0.2
+#    - task: NuGetCommand@2
+#      inputs:
+#        command: 'push'
+#        feedsToUse: 'select'
+#        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+#        nuGetFeedType: 'external'
+#        publishFeedCredentials: 'nuget.org'
+#        versioningScheme: 'off'
