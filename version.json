@@ -1,8 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/AArnott/Nerdbank.GitVersioning/master/src/NerdBank.GitVersioning/version.schema.json",
-  "version": "1.0-beta",
+  "version": "1.0-alpha",
   "nugetPackageVersion": {
     "semVer": 2 // optional. Set to either 1 or 2 to control how the NuGet package version string is generated. Default is 1.
+  },
+  "release": {
+    "branchName": "release/v{version}",
+    "versionIncrement": "minor",
+    "firstUnstableTag": "alpha"
   },
   "publicReleaseRefSpec": [
     "^refs/heads/master$",
