@@ -55,11 +55,11 @@ stages:
       displayName: 'Use NuGet 5.0.2'
       inputs:
         versionSpec: 5.0.2
-#    - task: NuGetCommand@2
-#      inputs:
-#        command: 'push'
-#        feedsToUse: 'select'
-#        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-#        nuGetFeedType: 'external'
-#        publishFeedCredentials: 'nuget.org'
-#        versioningScheme: 'off'
+    - task: NuGetCommand@2
+      inputs:
+        command: 'push'
+        feedsToUse: 'select'
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+        nuGetFeedType: 'external'
+        publishFeedCredentials: 'nuget.org'
+        versioningScheme: 'off'
