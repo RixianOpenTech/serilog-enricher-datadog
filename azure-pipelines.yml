@@ -6,33 +6,26 @@ stages:
   - job: Build
     pool:
       name: Hosted Ubuntu 1604
-    
     variables:
       buildConfiguration: 'Release'
       system.prefergit: true
-    
     steps:
     - checkout: self  # self represents the repo where the initial Pipelines YAML file was found
       persistCredentials: true  # set to 'true' to leave the OAuth token in the Git config after the initial fetch. Required for git commands.
-    
     - task: DotNetCoreInstaller@0
       displayName: 'Install .NET Core SDK'
       inputs:
         version: '2.2.204'
-    
     - script: dotnet restore
       displayName: 'Restore'
-    
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: 'Build'
-    
     - task: DotNetCoreCLI@2
       displayName: 'Test'
       inputs:
         command: test
         projects: '**/*Tests/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
-    
     - task: DotNetCoreCLI@2
       displayName: Pack
       inputs:
@@ -40,11 +33,10 @@ stages:
         projects: '**/src/**/*.csproj'
         custom: pack
         arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:SourceRevisionId=$(Build.BuildNumber) --verbosity Detailed'
-    
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact'
+    - task: PublishPipelineArtifact@0
       inputs:
-        PathtoPublish: '$(build.artifactstagingdirectory)'
+        artifactName: 'drop'
+        targetPath: '$(build.artifactstagingdirectory)'
 
 
 - stage: Release
@@ -54,6 +46,11 @@ stages:
     pool:
       name: Hosted Ubuntu 1604
     steps:
+    - task: DownloadPipelineArtifact@1
+      inputs:
+        buildType: 'current'
+        artifactName: 'drop'
+        targetPath: '$(System.ArtifactsDirectory)'
     - task: NuGetToolInstaller@1
       displayName: 'Use NuGet 5.0.2'
       inputs:
